@@ -14,7 +14,6 @@ app.set('view engine', 'ejs');
 const http = require('http').createServer(app);
 
 const indexRouter = require('./index');
-const oldIndexRouter = require('./old_index');
 const recorderRouter = require('./recorder');
 
 
@@ -34,7 +33,6 @@ app.use(logger(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
-app.use('/old_index', oldIndexRouter);
 app.use('/recorder', recorderRouter);
 
 http.listen(port, () => {
