@@ -1,0 +1,37 @@
+@charset "utf-8";
+/* I have to say,, This CSS is too simple to be used. */
+/* I am very poor graphical designer. */
+/* I like use the specific ID, */
+/* because I believe  the good specification usually depends on the contents. */
+/* But the TAG 'body' should be OK, because it should be used only once */
+/* Written 2019/06/06 by K. Umemura. */
+
+body{  width:1024px;
+	background-color:#cccccc;
+	display:flex;
+	align-items:flex-end;
+}
+
+#profile-part {
+	width:480px;
+	height:450px;
+        background-color:#dddddd;
+        font-size:141%;
+        margin:  4px 4px 4px 4px; 
+	padding: 12px 12px 12px 12px;
+}
+
+#picture-part {
+        width:448pt;
+}
+
+/* Please note that "music-information" is the name of class. */
+
+.music-information {
+	 text-decoration: underline;
+	 color: blue;
+}
+
+#music-part{
+	width:480px; 
+}

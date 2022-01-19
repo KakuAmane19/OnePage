@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+            <meta http-equiv="content-type"
+            content="text/html; charset=UTF-8">
+            <script type="text/javascript" src="/pdf_github.js-master/build/generic/build/pdf.js"></script>
+            <!--script src="canvas.js"></script--> 
+            <link rel="alternate">
+            <link rel="stylesheet" type="text/css" href="\css\main.css">
+            <link href="./Skeleton-2.0.4\css\skeleton.css" rel="stylesheet">
+            <title>
+                <%= title %>
+            </title>
+            <% if(process.env.NODE_ENV === 'production') { %>
+                <link rel="stylesheet"
+                    href="https://cdn.jsdelivr.net/combine/npm/sweetalert2@9.10.12/dist/sweetalert2.min.css,npm/bulma@0.8.2/css/bulma.min.css">
+                <script
+                    src="https://cdn.jsdelivr.net/combine/npm/sweetalert2@9.10.12,npm/@fortawesome/fontawesome-free@5.13.0/js/all.min.js,npm/socket.io-client@2.3.0/dist/socket.io.min.js"></script>
+                <% } else { %>
+                <link rel="stylesheet" href="css/bulma.css">
+                <link rel="stylesheet" href="css/sweetalert2.min.css">
+                <script src="js/sweetalert2.all.min.js"></script>
+                <script defer src="js/all.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2.3.0/dist/socket.io.min.js"></script>
+                <% } %>
+                <link rel="stylesheet" href="css/index.css">
+    </head>
+    <body>
+        <p>
+        <!--input id=nowCoord type="text" id="coord" size="20"-->
+        <button id="zoominout" onclick="doZoom()" disabled>拡大</button>
+        <input type="checkbox" id="selectButton" value="free" onchange="changeFlame(this.checked)" checked/>好きに見る
+                <!--a href= "./old_index.ejs" target="_blank">旧OnePage</a-->
+        <a href= "<%= link.href%>" target="_blank"><%= link.text%></a>
+        <a href= "<%= recorder.href%>" target="_blank"><%= recorder.text%></a>
+        </p>
+        <div class="canvas-wrapper">
+                <canvas id="pdf_canvas"> </canvas>
+                 <canvas id="red_rect"> </canvas>
+                 <canvas id="blue_rect"> </canvas>
+                 <canvas id="surface_rect"> </canvas>
+                 <canvas id="magnet" class="drag-and-drop local-mode" oncontextmenu="blink()"> </canvas>
+        </div>
+        
+    </body>
+    <script src="\js\canvas2.js"></script>
+</html>

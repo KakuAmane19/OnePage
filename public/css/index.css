@@ -1,0 +1,25 @@
+html{
+	overflow:scroll scroll;
+}
+
+.blink{animation:BLINK 0.4s ease-in-out infinite alternate;}
+@keyframes BLINK {0%{opacity:1.0;}100% {opacity:0;}}
+
+.drag-and-drop {
+    cursor: move;
+    position: absolute;
+    z-index: 1000;
+}
+
+.drag {
+    z-index: 1001;
+}
+
+.local-mode{
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.invisible{
+    visibility: hidden;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+            <meta http-equiv="content-type"
+            content="text/html; charset=UTF-8">
+            <script type="text/javascript" src="./pdf_github.js-master/build/generic/build/pdf.js"></script>
+            <script src="canvas.js"></script> 
+            <link rel="stylesheet" type="text/css" href="main.css">
+            <link href="./Skeleton-2.0.4\css\skeleton.css" rel="stylesheet">
+            <title>
+                <%= title %>
+            </title>
+            <% if(process.env.NODE_ENV === 'production') { %>
+                <link rel="stylesheet"
+                    href="https://cdn.jsdelivr.net/combine/npm/sweetalert2@9.10.12/dist/sweetalert2.min.css,npm/bulma@0.8.2/css/bulma.min.css">
+                <script
+                    src="https://cdn.jsdelivr.net/combine/npm/sweetalert2@9.10.12,npm/@fortawesome/fontawesome-free@5.13.0/js/all.min.js,npm/socket.io-client@2.3.0/dist/socket.io.min.js"></script>
+                <% } else { %>
+                <link rel="stylesheet" href="css/bulma.css">
+                <link rel="stylesheet" href="css/sweetalert2.min.css">
+                <script src="js/sweetalert2.all.min.js"></script>
+                <script defer src="js/all.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2.3.0/dist/socket.io.min.js"></script>
+                <% } %>
+                <link rel="stylesheet" href="css/index.css">
+    </head>
+    <body>
+        <p>
+            <button id="before" onclick="goBefore()">Before</button>
+            <button id="zoominout" onclick="doZoom()">拡大</button>
+            <button id="next" onclick="goNext()">Next</button>
+        </p>
+        <div class="canvas-wrapper">
+                <canvas id="pdf_canvas"> </canvas>
+                 <canvas id="red_rect"> </canvas>
+        </div>
+        <div class="sidecoord">
+            <ol id="coord">
+                <li><a id="1">(100,200),(300,400)</a></li>
+                
+            </ol>
+
+            <!--textarea id="coord" rows="50" cols="10" ></textarea-->
+            <button id="gainCoordButton" onclick="getCoordText()">読込</button>
+        </div>
+        <form action="#" method="post">
+        <p>
+           
+            現在<input id="currentPhase" type="text" name="current" size="5">
+            /<input id="allPhase" type="text" name="map" size="5" value="0" readonly>
+            
+        </p>
+        </form>
+    </body>
+    <script src="..\public\js\canvas.js"></script>
+</html>

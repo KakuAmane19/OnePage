@@ -1,0 +1,38 @@
+.canvas-wrapper {
+    position: relative;
+}
+.canvas-wrapper canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.sidecoord {
+    position: relative !important;
+    height: 1500px;
+}
+
+.sidecoord ol {
+    position: absolute;
+    top: 0px;
+    left: 1020px;
+    width:100px;
+    height: 1500px;
+}
+.sidecoord button {
+    position: absolute;
+    top: 0px;
+    left: 1130px;
+    width:100px;
+}
+
+
+/*
+#coord {
+    position: relative !important;
+}
+
+#gainCoordButton {
+    position: relative !important;
+}
+*/

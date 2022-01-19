@@ -1,0 +1,23 @@
+{
+    "name": "OnePage",
+    "version": "1.0.0",
+    "main": "app.js",
+    "repository": "",
+    "author": "AmaneKaku(kaku.amane.fz@tut.jp)",
+    "license": "MIT",
+    "scripts": {
+        "start": "node app.js",
+        "dev": "echo \"{}\" > db.json && npx nodemon app.js -i public -i *.json",
+        "prod": "echo \"{}\" > db.json && NODE_ENV=production node app.js"
+    },
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "ejs": "^3.0.2",
+        "express": "^4.17.1",
+        "log4js": "^6.2.1",
+        "lowdb": "^1.0.0",
+        "morgan": "^1.10.0",
+        "rotating-file-stream": "^2.1.0",
+        "socket.io": "^2.3.0"
+    }
+}
