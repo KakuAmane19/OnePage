@@ -579,7 +579,7 @@ function showFlame(coords){
  * Pdf初期レンダリング
  */
 // URL of PDF document
-let url = "../pdf/JSET_AMANE.pdf";
+let url = "../pdf/upload.pdf";
 
 // Asynchronous download PDF
 pdfjsLib.getDocument(url)

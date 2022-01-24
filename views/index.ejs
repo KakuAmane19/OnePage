@@ -33,6 +33,10 @@
                 <!--a href= "./old_index.ejs" target="_blank">旧OnePage</a-->
         
         <a href= "<%= recorder.href%>" target="_blank"><%= recorder.text%></a>
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="Upload">
+          </form>
         </p>
         <div class="canvas-wrapper">
                 <canvas id="pdf_canvas"> </canvas>
