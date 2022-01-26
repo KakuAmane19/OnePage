@@ -46,6 +46,11 @@ module.exports = (http) => {
                 isZoomed:isZoomed,
                 absolute:msg.absolute
             });
+            console.log(DROP_EVENT,{
+                coords: msg.coords,
+                isZoomed:isZoomed,
+                absolute:msg.absolute
+            });
         });
 
         socket.on(ZOOM_EVENT, msg => {
@@ -118,12 +123,16 @@ module.exports = (http) => {
                 magnetCoords:magnetCoords,
                 magnetIsVisible:magnetIsVisible
             });*/
-            console.log("MAGNET_EVENT",{msg});
+            console.log("MAGNET_EVENT",{
+                magnetCoords:magnetCoords,
+                magnetIsVisible:magnetIsVisible
+            });
         });
 
         socket.on(QUESTION_EVENT, msg =>{
             socket.broadcast.emit(QUESTION_EVENT);
             socket.emit(QUESTION_EVENT);
+            console.log(QUESTION_EVENT);
         });
 
         socket.on(PLAY_EVENT, msg =>{
