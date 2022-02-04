@@ -183,7 +183,7 @@ function showFlame(coords) {
     shared.rx = msg.coords[2];
     shared.ry = msg.coords[3];
 
-    if (!isZoomed && msg.isZoomed) socket.emit(ZOOM_EVENT, "Expansion");
+    if (!isZoomed && msg.isZoomed) socket.emit(ZOOM_EVENT, {command:"Expansion"});
 
     //反転チェック
     if (shared.rx < shared.lx) return;
@@ -211,6 +211,8 @@ function showFlame(coords) {
     let magnetY = msg.magnetCoords[1];
 
     if (msg.command == "Expansion") {
+      if(isZoomed) return;
+
       square.sx = shared.lx;
       square.sy = shared.ly;
       square.sw = shared.rx - shared.lx;
@@ -286,6 +288,7 @@ function showFlame(coords) {
             "scale" + scale
           );
         } else {
+          isZoomed = false;
           let magnetState = document.getElementById("magnet").classList;
           magnetState.add("invisible");
           /*socket.emit(MAGNET_EVENT, {
@@ -1094,8 +1097,6 @@ function doZoom(e) {
       absolute.ly = 0;
       absolute.rx = pdfCanvas.width;
       absolute.ry = pdfCanvas.height;
-
-      console.log({absolute})
 
       socket.emit(ZOOM_EVENT, {
         command: "Shrink",
