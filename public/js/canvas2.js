@@ -183,7 +183,7 @@ function showFlame(coords) {
     shared.rx = msg.coords[2];
     shared.ry = msg.coords[3];
 
-    if (!isZoomed && msg.isZoomed) socket.emit(ZOOM_EVENT, {command:"Expansion"});
+    //if (!isZoomed && msg.isZoomed) socket.emit(ZOOM_EVENT, {command:"Expansion"});
 
     //反転チェック
     if (shared.rx < shared.lx) return;
@@ -213,16 +213,21 @@ function showFlame(coords) {
     if (msg.command == "Expansion") {
       if(isZoomed) return;
 
-      square.sx = shared.lx;
+      /*square.sx = shared.lx;
       square.sy = shared.ly;
       square.sw = shared.rx - shared.lx;
-      square.sh = shared.ry - shared.ly;
+      square.sh = shared.ry - shared.ly;*/
 
       absolute.lx = msg.absolute[0];
       absolute.ly = msg.absolute[1];
       absolute.rx = msg.absolute[2];
       absolute.ry = msg.absolute[3];
       absolute.isLocal = shared.isLocal;
+
+      square.sx = absolute.lx;
+      square.sy = absolute.ly;
+      square.sw = absolute.rx - absolute.lx;
+      square.sh = absolute.ry - absolute.ly;
 
       //ボタンのテキストの張り替え
       document.getElementById("zoominout").textContent = "縮小";
@@ -288,7 +293,7 @@ function showFlame(coords) {
             "scale" + scale
           );
         } else {
-          isZoomed = false;
+          
           let magnetState = document.getElementById("magnet").classList;
           magnetState.add("invisible");
           /*socket.emit(MAGNET_EVENT, {
@@ -365,8 +370,6 @@ function showFlame(coords) {
           magnetIsVisible: true,
           row: 359,
         });*/
-        
-        magnetCoords = msg.magnetCoords;
 
         drawMagnet(30);
 
@@ -884,8 +887,20 @@ function onClick(e) {
       dragging = false;
       window.removeEventListener("mousemove", onMove, false);
 
-      //反転チェック
-      if (x + 10 < startx || y + 10 < starty) return;
+      //幅のない入力をはじく
+      if (x == startx && y == starty)return;
+
+      //反転補正
+      if (x < startx){
+        var temp = x;
+        x = startx;
+        startx = temp;
+      }
+      if (y < starty){
+        var temp = y;
+        y = starty;
+        starty = temp;
+      }
 
       surface.lx = parseInt(startx);
       surface.ly = parseInt(starty);
@@ -1027,6 +1042,9 @@ function doZoom(e) {
     //拡大
 
     if (!selectSwitch.checked) {
+
+      if(shared.lx == shared.rx || shared.ly == shared.ry) return;
+
       absolute.lx = shared.lx;
       absolute.ly = shared.ly;
       absolute.rx = shared.rx;
@@ -1038,6 +1056,8 @@ function doZoom(e) {
       });
       return;
     }
+
+    if(local.lx == local.rx || local.ly == local.ry) return;
 
     square.sx = local.lx;
     square.sy = local.ly;

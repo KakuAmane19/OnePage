@@ -59,11 +59,6 @@ module.exports = (http) => {
         isZoomed: isZoomed,
         absolute: msg.absolute,
       });
-      console.log(DROP_EVENT, {
-        coords: msg.coords,
-        isZoomed: isZoomed,
-        absolute: msg.absolute,
-      });
     });
 
     socket.on(ZOOM_EVENT, (msg) => {
@@ -77,10 +72,9 @@ module.exports = (http) => {
           i++;
         }
       }catch(error){
-        absolute[0] = 0;
-        absolute[1] = 0;
-        absolute[2] = pdfWidth;
-        absolute[3] = pdfHeight;
+
+        console.log(error,msg.absolute);
+        return;
       }
 
       if (!isZoomed) {
