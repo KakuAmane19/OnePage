@@ -1090,6 +1090,13 @@ function doZoom(e) {
     });
   } else {
     if (!selectSwitch.checked) {
+      absolute.lx = 0;
+      absolute.ly = 0;
+      absolute.rx = pdfCanvas.width;
+      absolute.ry = pdfCanvas.height;
+
+      console.log({absolute})
+
       socket.emit(ZOOM_EVENT, {
         command: "Shrink",
         absolute: [absolute.lx, absolute.ly, absolute.rx, absolute.ry],
