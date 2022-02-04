@@ -278,7 +278,8 @@ function showFlame(coords) {
             magnetIsVisible: true,
             row: 277,
           });*/
-
+          magnetCoords = msg.magnetCoords;
+          
           drawMagnet(parseInt(30 * scale));
           console.log(
             magnet.style.left + ":" + magnet.style.top,
@@ -361,6 +362,9 @@ function showFlame(coords) {
           magnetIsVisible: true,
           row: 359,
         });*/
+        
+        magnetCoords = msg.magnetCoords;
+
         drawMagnet(30);
 
         absolute.lx = 0;
@@ -462,10 +466,7 @@ function showFlame(coords) {
           magnetCoords[1] = magnetY;
           magnet.style.left = (magnetX - absolute.lx) * scale + "px";
           magnet.style.top = (magnetY - absolute.ly) * scale + "px";
-          /*socket.emit(MAGNET_EVENT,{
-              magnetCoords:magnetCoords,
-              magnetIsVisible:true
-            });*/
+
         } else {
           magnetCoords[0] = magnetX;
           magnetCoords[1] = magnetY;
@@ -1089,6 +1090,13 @@ function doZoom(e) {
     });
   } else {
     if (!selectSwitch.checked) {
+      absolute.lx = 0;
+      absolute.ly = 0;
+      absolute.rx = pdfCanvas.width;
+      absolute.ry = pdfCanvas.height;
+
+      console.log({absolute})
+
       socket.emit(ZOOM_EVENT, {
         command: "Shrink",
         absolute: [absolute.lx, absolute.ly, absolute.rx, absolute.ry],
