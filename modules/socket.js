@@ -37,6 +37,7 @@ module.exports = (http) => {
     });
 
     socket.on(DROP_EVENT, (msg) => {
+      console.log(DROP_EVENT,{msg})
       //誰かが座標登録した
       let i = 0;
       for (var value of msg.coords) {
@@ -66,12 +67,20 @@ module.exports = (http) => {
     });
 
     socket.on(ZOOM_EVENT, (msg) => {
+      console.log(ZOOM_EVENT,{msg})
       isZoomed = msg.command == "Expansion" ? true : false;
       let i = 0;
-      for (var value of msg.absolute) {
-        // オブジェクトの中のプロパティ名を取り出す。
-        absolute[i] = value;
-        i++;
+      try{
+        for (var value of msg.absolute) {
+          // オブジェクトの中のプロパティ名を取り出す。
+          absolute[i] = value;
+          i++;
+        }
+      }catch(error){
+        absolute[0] = 0;
+        absolute[1] = 0;
+        absolute[2] = pdfWidth;
+        absolute[3] = pdfHeight;
       }
 
       if (!isZoomed) {
@@ -101,6 +110,7 @@ module.exports = (http) => {
     });
 
     socket.on(SYNC_EVENT, (msg) => {
+      console.log(SYNC_EVENT,{msg})
       if (pdfWidth == -1 && pdfHeight == -1) {
         absolute[2] = msg[2];
         absolute[3] = msg[3];
@@ -119,7 +129,6 @@ module.exports = (http) => {
       });
       console.log(
         "SYNC_EVENT",
-        { msg },
         {
           coords: serverCoords,
           isZoomed: isZoomed,
@@ -133,6 +142,7 @@ module.exports = (http) => {
     });
 
     socket.on(MAGNET_EVENT, (msg) => {
+      console.log(MAGNET_EVENT,{msg})
       let i = 0;
       for (var value of msg.magnetCoords) {
         // オブジェクトの中のプロパティ名を取り出す。
@@ -156,12 +166,13 @@ module.exports = (http) => {
     });
 
     socket.on(QUESTION_EVENT, (msg) => {
+      console.log(QUESTION_EVENT,{msg})
       socket.broadcast.emit(QUESTION_EVENT);
       socket.emit(QUESTION_EVENT);
-      console.log(QUESTION_EVENT);
     });
 
     socket.on(PLAY_EVENT, (msg) => {
+      console.log(PLAY_EVENT,{msg})
       init = false;
 
       serverCoords = msg.coords;
@@ -179,7 +190,6 @@ module.exports = (http) => {
       });
       console.log(
         "PLAY_EVENT",
-        { msg },
         {
           coords: serverCoords,
           isZoomed: isZoomed,
