@@ -1180,8 +1180,14 @@ function doZoom(e) {
 /** ローカルモードのログを送る */
 function sendLog(command){
   socket.connect();
+
+  const dt = new Date(Date.now() + 3600000 * 9);
+  let datetime = dt.toISOString();
+  datetime = datetime.replace('T', ' ').replace(/Z$/, '');
   let id = socket.id;
+
   socket.emit(LOGING_EVEMT,{
+    date : datetime,
     socketID : id,
     command : command,
   });

@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const {
   ENTER_EVENT,
   DROP_EVENT,
@@ -198,7 +200,8 @@ module.exports = (http) => {
     });
 
     socket.on(LOGING_EVENT,(msg)=>{
-      console.log(msg);
+      const message = JSON.stringify(msg);
+      console.log(message);
     });
 
     socket.on("disconnect", (reason) => {
