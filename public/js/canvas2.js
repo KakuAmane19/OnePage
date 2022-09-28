@@ -1193,6 +1193,7 @@ function sendLog(command){
     socketID : id,
     explicitID: explicit_id,
     command : command,
+    coords : local,
   });
 }
 
