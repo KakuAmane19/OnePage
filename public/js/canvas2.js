@@ -958,10 +958,6 @@ function onClick(e) {
       }
 
       if (selectSwitch.checked) {
-
-        socket.emit(LOGING_EVEMT,"LOGING");
-        console.log("LOGGING");
-
         if (local.init) {
           document.getElementById("zoominout").disabled = false;
           local.init = false;
@@ -1116,6 +1112,9 @@ function doZoom(e) {
       else redFlameContext.strokeStyle = "#f00";
       redFlameContext.strokeRect(0, 0, square.sw * scale, square.sh * scale);
     });
+
+    socket.emit(LOGING_EVEMT,"LOGING");
+
   } else {
     if (!selectSwitch.checked) {
       absolute.lx = 0;
@@ -1174,6 +1173,8 @@ function doZoom(e) {
     pdfPage.render(renderContext).promise.then(function () {
       showFlame(local);
     });
+
+    socket.emit(LOGING_EVEMT,"LOGING");
   }
 }
 
