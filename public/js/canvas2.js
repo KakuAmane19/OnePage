@@ -1179,6 +1179,7 @@ function doZoom(e) {
 
 /** ローカルモードのログを送る */
 function sendLog(command){
+  socket.connect();
 
   const dt = new Date(Date.now() + 3600000 * 9);
   let datetime = dt.toISOString();
