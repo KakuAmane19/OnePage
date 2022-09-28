@@ -22782,3 +22782,16 @@
 ::1 - - [28/Sep/2022:09:42:38 +0000] "GET /pdf_github.js-master/build/generic/build/pdf.js.map HTTP/1.1" 200 760756
 ::1 - - [28/Sep/2022:09:42:38 +0000] "GET /css/bulma.css.map HTTP/1.1" 200 88682
 ::1 - - [28/Sep/2022:09:42:38 +0000] "GET /pdf_github.js-master/build/generic/build/pdf.worker.js.map HTTP/1.1" 304 -
+::ffff:127.0.0.1 - - [28/Sep/2022:09:59:27 +0000] "GET / HTTP/1.1" 304 -
+::ffff:127.0.0.1 - - [28/Sep/2022:09:59:27 +0000] "GET /pdf_github.js-master/build/generic/build/pdf.js HTTP/1.1" 304 -
+::ffff:127.0.0.1 - - [28/Sep/2022:09:59:27 +0000] "GET /css/main.css HTTP/1.1" 304 -
+::1 - - [28/Sep/2022:09:59:27 +0000] "GET /css/sweetalert2.min.css HTTP/1.1" 304 -
+::ffff:127.0.0.1 - - [28/Sep/2022:09:59:27 +0000] "GET /js/sweetalert2.all.min.js HTTP/1.1" 304 -
+::ffff:127.0.0.1 - - [28/Sep/2022:09:59:27 +0000] "GET /js/all.js HTTP/1.1" 304 -
+::ffff:127.0.0.1 - - [28/Sep/2022:09:59:27 +0000] "GET /js/canvas2.js HTTP/1.1" 200 34255
+::ffff:127.0.0.1 - - [28/Sep/2022:09:59:27 +0000] "GET /css/bulma.css.map HTTP/1.1" 200 88682
+::ffff:127.0.0.1 - - [28/Sep/2022:09:59:27 +0000] "GET /pdf_github.js-master/build/generic/build/pdf.js.map HTTP/1.1" 200 760756
+::ffff:127.0.0.1 - - [28/Sep/2022:09:59:27 +0000] "GET /pdf_github.js-master/build/generic/build/pdf.worker.js HTTP/1.1" 304 -
+::ffff:127.0.0.1 - - [28/Sep/2022:09:59:27 +0000] "GET /favicon.ico HTTP/1.1" 304 -
+::ffff:127.0.0.1 - - [28/Sep/2022:09:59:28 +0000] "GET /pdf/upload.pdf HTTP/1.1" 304 -
+::ffff:127.0.0.1 - - [28/Sep/2022:09:59:28 +0000] "GET /pdf_github.js-master/build/generic/build/pdf.worker.js.map HTTP/1.1" 304 -

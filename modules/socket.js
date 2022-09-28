@@ -201,7 +201,10 @@ module.exports = (http) => {
 
     socket.on(LOGING_EVENT,(msg)=>{
       const message = JSON.stringify(msg);
-      console.log(message);
+
+      logmessage = msg.date + "," + msg.socketID + "," + msg.explicitID + "," + msg.command + "," + "["+msg.coords.lx + "," +msg.coords.ly + "," +msg.coords.rx + "," + msg.coords.ry + "]";
+
+      console.log(logmessage);
     });
 
     socket.on("disconnect", (reason) => {
