@@ -1184,11 +1184,15 @@ function sendLog(command){
   const dt = new Date(Date.now() + 3600000 * 9);
   let datetime = dt.toISOString();
   datetime = datetime.replace('T', ' ').replace(/Z$/, '');
+
   let id = socket.id;
+
+  let explicit_id = document.getElementById("explicitID").value;
 
   socket.emit(LOGING_EVEMT,{
     date : datetime,
     socketID : id,
+    explicitID: explicit_id,
     command : command,
   });
 }
