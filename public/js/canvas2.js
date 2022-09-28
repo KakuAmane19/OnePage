@@ -1113,8 +1113,7 @@ function doZoom(e) {
       redFlameContext.strokeRect(0, 0, square.sw * scale, square.sh * scale);
     });
 
-    socket.emit(LOGING_EVEMT,"LOGING");
-
+    sendLog("Expansion");
   } else {
     if (!selectSwitch.checked) {
       absolute.lx = 0;
@@ -1174,8 +1173,18 @@ function doZoom(e) {
       showFlame(local);
     });
 
-    socket.emit(LOGING_EVEMT,"LOGING");
+    sendLog("Shrink");
   }
+}
+
+/** ローカルモードのログを送る */
+function sendLog(command){
+  socket.connect();
+  let id = socket.id;
+  socket.emit(LOGING_EVEMT,{
+    socketID : id,
+    command : command,
+  });
 }
 
 /**スイッチを付け替えた瞬間の表示枠変換 */
