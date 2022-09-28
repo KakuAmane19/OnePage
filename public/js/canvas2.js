@@ -42,6 +42,7 @@ const SYNC_EVENT = "SYNC_EVENT";
 const MAGNET_EVENT = "MAGNET_EVENT";
 const PLAY_EVENT = "PLAY_EVENT";
 const QUESTION_EVENT = "QUESTION_EVENT";
+const LOGING_EVEMT = "LOGING_EVENT";
 
 const socket = io();
 /******************************/
@@ -957,11 +958,15 @@ function onClick(e) {
       }
 
       if (selectSwitch.checked) {
+
+        socket.emit(LOGING_EVEMT,"LOGING");
+        console.log("LOGGING");
+
         if (local.init) {
           document.getElementById("zoominout").disabled = false;
           local.init = false;
         }
-
+        
         showFlame(local);
       } else {
         socket.emit(DROP_EVENT, {

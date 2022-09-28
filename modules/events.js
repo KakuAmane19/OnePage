@@ -6,6 +6,7 @@ const SYNC_EVENT = 'SYNC_EVENT';
 const MAGNET_EVENT = 'MAGNET_EVENT';
 const PLAY_EVENT = 'PLAY_EVENT';
 const QUESTION_EVENT = 'QUESTION_EVENT';
+const LOGING_EVENT = 'LOGING_EVENT';
 
 module.exports = {
     ENTER_EVENT,
@@ -15,5 +16,6 @@ module.exports = {
     ZOOM_EVENT,
     MAGNET_EVENT,
     PLAY_EVENT,
-    QUESTION_EVENT
+    QUESTION_EVENT,
+    LOGING_EVENT
 }

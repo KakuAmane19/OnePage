@@ -7,6 +7,7 @@ const {
   MAGNET_EVENT,
   PLAY_EVENT,
   QUESTION_EVENT,
+  LOGING_EVENT
 } = require("./events");
 
 module.exports = (http) => {
@@ -19,6 +20,7 @@ module.exports = (http) => {
   let absolute = [0, 0, 0, 0];
   let pdfWidth = -1;
   let pdfHeight = -1;
+  let id = "";
 
   const io = require("socket.io")(http);
 
@@ -34,6 +36,7 @@ module.exports = (http) => {
         return;
       }
       console.log(`accept new user`);
+      console.log(socket.id);
     });
 
     socket.on(DROP_EVENT, (msg) => {
@@ -192,6 +195,10 @@ module.exports = (http) => {
           magnetIsVisible: magnetIsVisible,
         }
       );
+    });
+
+    socket.on(LOGING_EVENT,(msg)=>{
+      console.log(msg);
     });
 
     socket.on("disconnect", (reason) => {
