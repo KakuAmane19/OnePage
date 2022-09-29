@@ -6,7 +6,7 @@
     "author": "AmaneKaku(kaku.amane.fz@tut.jp)",
     "license": "MIT",
     "scripts": {
-        "start": "node-dev app.js",
+        "start": "node app.js",
         "dev": "echo \"{}\" > db.json && npx nodemon app.js -i public -i *.json",
         "prod": "echo \"{}\" > db.json && NODE_ENV=production node app.js"
     },

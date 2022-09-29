@@ -12,6 +12,38 @@ const {
   LOGING_EVENT
 } = require("./events");
 
+
+function makelogdir(){
+  if (fs.existsSync('logs')) {
+    console.log('logs directory is already exist.');
+  } else {
+    console.log('logs directory is not exist.');
+    fs.mkdir('logs', (err) => {
+      if (err) { throw err; }
+      console.log('logs directory is made.');
+    });
+  }
+}
+
+function makelogFile(filename){
+  fs.open('logs/' + filename, 'w' ,function (err) {
+    if (err) { throw err; }
+    console.log(filename+ 'is made');
+  });
+}
+
+function appendlog(filename,message){
+
+  let log = message + "\n";
+
+  fs.appendFile('logs/' + filename, log, function (err) {
+    if (err) {
+        throw err;
+    }
+    console.log(message);
+  });
+}
+
 module.exports = (http) => {
   let changeInZoom = false;
   let serverCoords = [0, 0, 0, 0];
@@ -26,6 +58,17 @@ module.exports = (http) => {
 
   const io = require("socket.io")(http);
 
+
+  makelogdir();
+
+  const dt = new Date(Date.now() + 3600000 * 9);
+  let datetime = dt.toISOString();
+  datetime = datetime.replace('T', '_').replace(/\.\d{1,3}Z$/, '').replace(/\D/g,'');
+  const logfile_name = datetime + '.log';
+  //const logfile_name = "test.log";
+
+  makelogFile(logfile_name);
+  
   io.on("connection", (socket) => {
     console.log(`OnePageStart`);
 
@@ -37,8 +80,8 @@ module.exports = (http) => {
         socket.emit(ERROR_EVENT, "error connection");
         return;
       }
-      console.log(`accept new user`);
-      console.log(socket.id);
+
+      appendlog(logfile_name,`accept new user `+ socket.id);
     });
 
     socket.on(DROP_EVENT, (msg) => {
@@ -153,10 +196,7 @@ module.exports = (http) => {
         magnetCoords: magnetCoords,
         magnetIsVisible: magnetIsVisible,
       });
-      /*socket.emit(MAGNET_EVENT,{
-                magnetCoords:magnetCoords,
-                magnetIsVisible:magnetIsVisible
-            });*/
+      
       console.log("MAGNET_EVENT", {
         magnetCoords: magnetCoords,
         magnetIsVisible: magnetIsVisible,
@@ -204,7 +244,7 @@ module.exports = (http) => {
 
       logmessage = msg.date + "," + msg.socketID + "," + msg.explicitID + "," + msg.command + "," + "["+msg.coords.lx + "," +msg.coords.ly + "," +msg.coords.rx + "," + msg.coords.ry + "]";
 
-      console.log(logmessage);
+      appendlog(logfile_name,logmessage);
     });
 
     socket.on("disconnect", (reason) => {
