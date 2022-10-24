@@ -727,11 +727,11 @@ pdfjsLib
     // Set dimensions to Canvas
     //if(viewport.width > 1000){
     //n = vw/1000
-    pdfCanvas.height = viewport.height * (MAX_WIDTH / viewport.width);
+    defaultScale = MAX_WIDTH / viewport.width;
+    pdfCanvas.height = viewport.height * defaultScale;
     pdfCanvas.width = MAX_WIDTH;
 
-    viewportParametors.scale = MAX_WIDTH / viewport.width;
-    defaultScale = MAX_WIDTH / viewport.width;
+    viewportParametors.scale = defaultScale;
     viewport = page.getViewport(viewportParametors);
     //}else{
     //pdfCanvas.height = viewport.height;
