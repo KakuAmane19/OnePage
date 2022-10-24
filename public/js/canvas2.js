@@ -33,7 +33,7 @@ let scale = 1.0;
 
 let isZoomed = false;
 const MAX_WIDTH = 1000;
-const MAX_HEIGHT = 800;
+const MAX_HEIGHT = 700;
 /******************************/
 /*Socket
  */
@@ -725,18 +725,18 @@ pdfjsLib
     let viewport = page.getViewport(viewportParametors);
 
     // Set dimensions to Canvas
-    //if(viewport.width > 1000){
-    //n = vw/1000
     defaultScale = MAX_WIDTH / viewport.width;
     pdfCanvas.height = viewport.height * defaultScale;
     pdfCanvas.width = MAX_WIDTH;
+    
+    if(pdfCanvas.height > MAX_HEIGHT){
+      defaultScale = MAX_HEIGHT / viewport.height;
+      pdfCanvas.width = viewport.width * defaultScale;
+      pdfCanvas.height = MAX_HEIGHT;  
+    }
 
     viewportParametors.scale = defaultScale;
     viewport = page.getViewport(viewportParametors);
-    //}else{
-    //pdfCanvas.height = viewport.height;
-    //pdfCanvas.width = viewport.width;
-    //}
 
     // Prepare object needed by render method
     var renderContext = {
