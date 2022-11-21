@@ -1,6 +1,51 @@
+/****************
+* ページレイアウト
+*****************/
+
+html{
+	overflow:scroll scroll;
+}
+
+body {
+    margin: 16px;
+}
+
+/****************
+* マグネット
+*****************/
+
+.blink{animation:BLINK 0.4s ease-in-out infinite alternate;}
+@keyframes BLINK {0%{opacity:1.0;}100% {opacity:0;}}
+
+.drag-and-drop {
+    cursor: move;
+    position: absolute;
+    z-index: 1000;
+}
+
+.drag {
+    z-index: 1001;
+}
+
+/****************
+* モード
+*****************/
+.local-mode{
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.invisible{
+    visibility: hidden;
+}
+
+/****************
+* モード
+*****************/
 .canvas-wrapper {
     position: relative;
 }
+
 .canvas-wrapper canvas {
     position: absolute;
     top: 0;
@@ -26,13 +71,83 @@
     width:100px;
 }
 
-
-/*
-#coord {
-    position: relative !important;
+/** スクローラ用*/
+.buttons {
+    display: flex;
 }
 
-#gainCoordButton {
-    position: relative !important;
+/** 下準備_ボタン **/
+
+.btn {
+    border-style: none;
+    cursor: pointer;
+    margin: auto;
+    padding: 0px 0px 0px 0px;
+    text-align: center;
 }
-*/
+
+/** 下準備_十字配置部品 **/
+
+.cross-layout {
+    margin: 16px;
+    display: grid;
+    grid-template-columns: 70px 80px 70px;
+    grid-template-rows: 40px 40px 40px;
+}
+
+.cross-layout .position-top {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+}
+
+.cross-layout .position-left {
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+}
+
+.cross-layout .position-center {
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+}
+
+.cross-layout .position-right {
+    grid-row: 2 / 3;
+    grid-column: 3/4;
+}
+
+.cross-layout .position-bottom {
+    grid-row: 3 / 4;
+    grid-column: 2/3;
+}
+
+/**　コントローラーの左側_十字キー**/
+
+.cross-key-btn {
+    width: 70px;
+    height: 30px;
+    background-color: rgba(66, 86, 123, 0.5);
+}
+
+.left-mark {
+
+    display: inline-block;
+    transform: rotate(-90deg);
+}
+
+.right-mark {
+    display: inline-block;
+    transform: rotate(90deg);
+}
+
+.bottom-mark {
+    display: inline-block;
+    transform: rotate(180deg);
+}
+
+.top-mark {
+    display: inline-block;
+}
+
+.cemter-mark {
+    display: inline-block;
+}

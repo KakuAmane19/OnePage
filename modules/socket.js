@@ -26,9 +26,10 @@ function makelogdir(){
 }
 
 function makelogFile(filename){
+  filename = "debug";
   fs.open('logs/' + filename, 'w' ,function (err) {
     if (err) { throw err; }
-    console.log(filename+ 'is made');
+    console.log(filename+ ' is made');
   });
 }
 

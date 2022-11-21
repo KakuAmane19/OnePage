@@ -25,7 +25,7 @@ const accessLogStream = rfs.createStream('access.log', {
 });
 
 require('./modules/socket')(http);
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 
 app.use(logger(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length]', {
