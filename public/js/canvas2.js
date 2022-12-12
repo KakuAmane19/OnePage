@@ -32,6 +32,8 @@ let defaultScale = 1.0;
 let scale = 1.0;
 
 let isZoomed = false;
+const MAX_WIDTH = 1000;
+const MAX_HEIGHT = 700;
 /******************************/
 /*Socket
  */
@@ -42,6 +44,7 @@ const SYNC_EVENT = "SYNC_EVENT";
 const MAGNET_EVENT = "MAGNET_EVENT";
 const PLAY_EVENT = "PLAY_EVENT";
 const QUESTION_EVENT = "QUESTION_EVENT";
+const LOGING_EVEMT = "LOGING_EVENT";
 
 const socket = io();
 /******************************/
@@ -722,18 +725,18 @@ pdfjsLib
     let viewport = page.getViewport(viewportParametors);
 
     // Set dimensions to Canvas
-    //if(viewport.width > 1000){
-    //n = vw/1000
-    pdfCanvas.height = viewport.height * (1000 / viewport.width);
-    pdfCanvas.width = 1000;
+    defaultScale = MAX_WIDTH / viewport.width;
+    pdfCanvas.height = viewport.height * defaultScale;
+    pdfCanvas.width = MAX_WIDTH;
+    
+    if(pdfCanvas.height > MAX_HEIGHT){
+      defaultScale = MAX_HEIGHT / viewport.height;
+      pdfCanvas.width = viewport.width * defaultScale;
+      pdfCanvas.height = MAX_HEIGHT;  
+    }
 
-    viewportParametors.scale = 1000 / viewport.width;
-    defaultScale = 1000 / viewport.width;
+    viewportParametors.scale = defaultScale;
     viewport = page.getViewport(viewportParametors);
-    //}else{
-    //pdfCanvas.height = viewport.height;
-    //pdfCanvas.width = viewport.width;
-    //}
 
     // Prepare object needed by render method
     var renderContext = {
@@ -961,7 +964,7 @@ function onClick(e) {
           document.getElementById("zoominout").disabled = false;
           local.init = false;
         }
-
+        
         showFlame(local);
       } else {
         socket.emit(DROP_EVENT, {
@@ -1111,6 +1114,8 @@ function doZoom(e) {
       else redFlameContext.strokeStyle = "#f00";
       redFlameContext.strokeRect(0, 0, square.sw * scale, square.sh * scale);
     });
+
+    sendLog("Expansion");
   } else {
     if (!selectSwitch.checked) {
       absolute.lx = 0;
@@ -1169,7 +1174,30 @@ function doZoom(e) {
     pdfPage.render(renderContext).promise.then(function () {
       showFlame(local);
     });
+
+    sendLog("Shrink");
   }
+}
+
+/** ローカルモードのログを送る */
+function sendLog(command){
+  socket.connect();
+
+  const dt = new Date(Date.now() + 3600000 * 9);
+  let datetime = dt.toISOString();
+  datetime = datetime.replace('T', ' ').replace(/Z$/, '');
+
+  let id = socket.id;
+
+  let explicit_id = document.getElementById("explicitID").value;
+
+  socket.emit(LOGING_EVEMT,{
+    date : datetime,
+    socketID : id,
+    explicitID: explicit_id,
+    command : command,
+    coords : local,
+  });
 }
 
 /**スイッチを付け替えた瞬間の表示枠変換 */

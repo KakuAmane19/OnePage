@@ -29,14 +29,15 @@
         <p>
         <!--input id=nowCoord type="text" id="coord" size="20"-->
         <button id="zoominout" onclick="doZoom()" disabled>拡大</button>
-        <input type="checkbox" id="selectButton" value="free" onchange="changeFlame(this.checked)" checked/>好きに見る
+        <input type="checkbox" id="selectButton" value="free" onchange="changeFlame(this.checked)" checked disabled/>好きに見る
                 <!--a href= "./old_index.ejs" target="_blank">旧OnePage</a-->
         
         <a href= "<%= recorder.href%>" target="_blank"><%= recorder.text%></a>
-        <form action="/" method="POST" enctype="multipart/form-data">
+        <input type="text" id="explicitID" name="explicitID" placeholder="012345(学籍番号)" size="10">
+        <!--form action="/" method="POST" enctype="multipart/form-data">
             <input type="file" name="file">
             <input type="submit" value="Upload">
-          </form>
+          </form-->
         </p>
         <div class="canvas-wrapper">
                 <canvas id="pdf_canvas"> </canvas>
